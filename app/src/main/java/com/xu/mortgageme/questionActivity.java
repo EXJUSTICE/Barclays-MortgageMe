@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-//TODO make save profile.
+//TODO saveprofile methods need more work
 
 public class questionActivity extends AppCompatActivity {
     Button ok;
@@ -34,6 +34,7 @@ public class questionActivity extends AppCompatActivity {
     String reply;
     String name;
     int amount;
+    int deposit;
     int paybackyears;
     int income;
     int numjobs;
@@ -117,12 +118,12 @@ public class questionActivity extends AppCompatActivity {
 
     public void checkReplyFormat(String reply){
         if (answer.getVisibility()==View.VISIBLE){
-            if(count ==0 || count==5){
+            if(count ==0 || count==6){
                 updateQuestion(reply);
                 count +=1;
             }
 
-            else if (count==1|| count ==2|| count==3||count==4){
+            else if (count==1|| count ==2|| count==3||count==4||count ==5){
                 try {
                     Integer.parseInt(reply);
                     updateQuestion(reply);
@@ -134,9 +135,15 @@ public class questionActivity extends AppCompatActivity {
                     question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
                 }
             }
-        }else if (answer.getVisibility()==View.INVISIBLE){
+        }else if (answer.getVisibility()==View.INVISIBLE&& count==1){
             String seekreply = seekbarView.getText().toString();
             amount =Integer.parseInt(seekbarView.getText().toString());
+
+            updateQuestion(seekreply);
+            count  +=1;
+        }else if (answer.getVisibility()==View.INVISIBLE&& count==2){
+            String seekreply = seekbarView.getText().toString();
+            deposit =Integer.parseInt(seekbarView.getText().toString());
 
             updateQuestion(seekreply);
             count  +=1;
@@ -205,19 +212,30 @@ public class questionActivity extends AppCompatActivity {
                 }, 3000);
 
             } else if (count == 1) {
+                amount = Integer.parseInt(reply);
+                question.setText("Please select the amount of deposit you are prepared to pay");
+                question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
+                answer.getText().clear();
+                answer.setVisibility(View.INVISIBLE);
+                seekbarView.setVisibility(View.VISIBLE);
+                sb.setVisibility(View.VISIBLE);
+                amountView.setVisibility(View.VISIBLE);
+
+
+            } else if (count == 2) {
                 answer.setVisibility(View.VISIBLE);
                 seekbarView.setVisibility(View.INVISIBLE);
                 sb.setVisibility(View.INVISIBLE);
                 amountView.setVisibility(View.INVISIBLE);
+                deposit = Integer.parseInt(reply);
 
-                amount = Integer.parseInt(reply);
                 question.setText("Alright, and what would you prefer as a payback period (in years)?");
                 answer.getText().clear();
                 question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
 
-            } else if (count == 2) {
+            } else if (count == 3) {
                 paybackyears = Integer.parseInt(reply);
-                question.setText("Alright, you requested " + amount + " pounds, with a payback time of  " + paybackyears + " years");
+                question.setText("Alright, you requested £" + amount + ", with a deposit of £"+ deposit+" and a payback time of  " + paybackyears + " years");
                 answer.getText().clear();
                 question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
                 final Handler handler1 = new Handler();
@@ -238,25 +256,24 @@ public class questionActivity extends AppCompatActivity {
                 }, 3000);
 
 
-            } else if (count == 3) {
+            } else if (count == 4) {
                 income = Integer.parseInt(reply);
                 question.setText("Okay. How many jobs have you held over the past three years?");
                 answer.getText().clear();
                 question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
-
-            } else if (count == 4) {
+            } else if (count == 5) {
                 numjobs = Integer.parseInt(reply);
                 question.setText("Alright. Finally, please give the postcode of the property you're interested");
                 answer.getText().clear();
                 question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
-            } else if (count == 5) {
+            } else if (count ==6){
                 postcode = reply;
                 question.setText("Thank you. Let me fetch you a quote. One moment...");
                 answer.getText().clear();
                 question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
                 //TODO runn methods here with all variables, save in sharedprefs
-                Calculations calc = new Calculations(income,numjobs,paybackyears,amount);
-                interest = calc.getOnly_interest();
+                Calculations calc = new Calculations(income,numjobs,paybackyears,amount,deposit);
+                interest = calc.getInterest();
                 final Handler handler2 = new Handler();
                 handler2.postDelayed(new Runnable() {
                     @Override
@@ -267,6 +284,7 @@ public class questionActivity extends AppCompatActivity {
                         launchquote.putExtra("income", income);
                         launchquote.putExtra("numjobs", numjobs);
                         launchquote.putExtra("interest", interest);
+                        launchquote.putExtra("post",postcode);
                         startActivity(launchquote);
                     }
                 }, 5000);
@@ -277,50 +295,68 @@ public class questionActivity extends AppCompatActivity {
 
 
             } else if (count == 0) {
+            amount = Integer.parseInt(reply);
+            question.setText("Hello " + reply + " , thank you for choosing Barclays today");
+            question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
+            answer.getText().clear();
+            answer.setVisibility(View.INVISIBLE);
+            seekbarView.setVisibility(View.VISIBLE);
+            sb.setVisibility(View.VISIBLE);
+            amountView.setVisibility(View.VISIBLE);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    question.setText("Please select the amount of deposit you are prepared to pay");
+                    question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
+                }
+            }, 3000);
+
+
+            } else if (count == 1) {
             answer.setVisibility(View.VISIBLE);
             seekbarView.setVisibility(View.INVISIBLE);
             sb.setVisibility(View.INVISIBLE);
             amountView.setVisibility(View.INVISIBLE);
 
-                amount = Integer.parseInt(reply);
-                question.setText("Alright, and what would you prefer as a payback period (in years)?");
+            amount = Integer.parseInt(reply);
+            question.setText("Alright, and what would you prefer as a payback period (in years)?");
             answer.getText().clear();
-                question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
+            question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
 
-
-            } else if (count == 1) {
-
-                paybackyears = Integer.parseInt(reply);
-                question.setText("Alright. Finally, please give the postcode of the property you're interested");
-            answer.getText().clear();
                 question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
             } else if (count == 2) {
-                postcode = reply;
-                question.setText("Thank you. Let me fetch you a quote. One moment...");
+                    paybackyears = Integer.parseInt(reply);
+                    question.setText("Alright. Finally, please give the postcode of the property you're interested");
+                    answer.getText().clear();
+            }else if(count ==3){
+            postcode = reply;
+            question.setText("Thank you. Let me fetch you a quote. One moment...");
             answer.getText().clear();
-                question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
+            question.setAnimation(AnimationUtils.loadAnimation(questionActivity.this,android.R.anim.slide_in_left));
 
             //TODO begin run of Zenia's code, start with Constructor
             //int annual_income, int num_of_jobs, int duration, int loan
-            Calculations calc = new Calculations(income,numjobs,paybackyears,amount);
-            interest = calc.getOnly_interest();
+            Calculations calc = new Calculations(income,numjobs,paybackyears,amount,deposit);
+            interest = calc.getInterest();
 
             question.setText(Double.toString(interest));
 
-                final Handler handler2 = new Handler();
-                handler2.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent launchquote = new Intent(questionActivity.this, quoteActivity.class);
-                        launchquote.putExtra("name", name);
-                        launchquote.putExtra("payback", paybackyears);
-                        launchquote.putExtra("income", income);
-                        launchquote.putExtra("numjobs", numjobs);
-                        launchquote.putExtra("interest",interest);
-                        startActivity(launchquote);
-                    }
-                }, 5000);
-            }
+            final Handler handler2 = new Handler();
+            handler2.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent launchquote = new Intent(questionActivity.this, quoteActivity.class);
+                    launchquote.putExtra("name", name);
+                    launchquote.putExtra("payback", paybackyears);
+                    launchquote.putExtra("income", income);
+                    launchquote.putExtra("numjobs", numjobs);
+                    launchquote.putExtra("interest",interest);
+                    launchquote.putExtra("post",postcode);
+                    startActivity(launchquote);
+                }
+            }, 5000);
+        }
         }
     }
 

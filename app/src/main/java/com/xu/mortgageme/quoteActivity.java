@@ -31,8 +31,10 @@ public class quoteActivity extends AppCompatActivity {
     int paybackyears;
     int income;
     int numjobs;
+    String postcode;
     double interest;
     private static final int MY_PERMISSIONS_REQUEST_CALL_PHONE = 1234;
+    boolean shown =false;
 
 
 
@@ -61,6 +63,7 @@ public class quoteActivity extends AppCompatActivity {
         income =intent.getIntExtra("income",0);
         numjobs=intent.getIntExtra("numjobs",0);
         interest= intent.getDoubleExtra("interest",0D);
+        postcode = intent.getStringExtra("post");
 
         sp = getSharedPreferences("decisions", Context.MODE_PRIVATE);
         edit = sp.edit();
@@ -91,9 +94,24 @@ public class quoteActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                if(shown ==false){
 
-                Intent goHome = new Intent(quoteActivity.this, MainActivity.class);
-                startActivity(goHome);
+                    DialogFragment df = new DialogFragment();
+                    SharedPreferences sp = getSharedPreferences("user",Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor= sp.edit();
+                    editor.putString("post",postcode);
+                    editor.commit();
+                    df.show(getSupportFragmentManager(),"Nearby Services");
+
+
+
+                }else{
+                    Intent goHome = new Intent(quoteActivity.this, MainActivity.class);
+                    startActivity(goHome);
+                }
+
+                shown =true;
+
 
             }
         });
