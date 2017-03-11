@@ -32,14 +32,14 @@
 
     <Button
         android:id="@+id/btncall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/amountView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="97dp"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:text="Arrange appointment with a member of our team" />
+        android:text="Arrange appointment with a member of our team"
+        android:layout_below="@+id/amountView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp" />
 
     <TextView
         android:id="@+id/textView3"
@@ -54,8 +54,16 @@
         android:id="@+id/btnreset"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Start over"
         android:layout_below="@+id/btncall"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btnsave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnreset"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
-        android:text="Start over" />
+        android:text="Save Profile" />
 </RelativeLayout>

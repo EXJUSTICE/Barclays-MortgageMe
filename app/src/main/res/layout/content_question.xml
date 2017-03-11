@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.xu.mortgageme.questionActivity"
     tools:showIn="@layout/activity_question">
@@ -15,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="88dp"
-        android:lines="2"
+        android:lines="3"
         android:text="Insert question here"
         android:textSize="22dp"
         tools:maxLines="3" />
@@ -37,6 +39,31 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="82dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Type in answer here" />
+        android:inputType="textCapSentences"
+        android:hint="Type in your reply here" />
+
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/answerView"
+        android:layout_centerHorizontal="true"
+        android:max ="1000000"/>
+
+    <TextView
+        android:id="@+id/seekbarValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/answerView"
+        android:layout_toEndOf="@+id/amountview" />
+
+    <TextView
+        android:id="@+id/amountview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amount(£): "
+        android:layout_alignBaseline="@+id/seekbarValue"
+        android:layout_alignBottom="@+id/seekbarValue"
+        android:layout_alignStart="@+id/questionView"
+        android:layout_marginStart="32dp" />
 </RelativeLayout>

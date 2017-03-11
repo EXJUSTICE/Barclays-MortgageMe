@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Toast;
 
 //Uses Activity main, opening page
 public class MainActivity extends AppCompatActivity {
@@ -20,11 +21,13 @@ public class MainActivity extends AppCompatActivity {
     Boolean questions;
     SharedPreferences sp;
     SharedPreferences.Editor edit;
+    SharedPreferences user;
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
        sp = getSharedPreferences("mode", Context.MODE_PRIVATE);
        edit= sp.edit();
@@ -35,13 +38,21 @@ public class MainActivity extends AppCompatActivity {
         launchcar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                questions=true;
-                edit.putBoolean("mode",questions);
-                edit.commit();
+                user = getSharedPreferences("decisions",Context.MODE_PRIVATE);
 
-                //True status indicates we are considering car loan
-                Intent launch= new Intent(MainActivity.this, questionActivity.class);
-                startActivity(launch);
+                if (user.getString("name","empty").equals("empty")){
+                    Toast.makeText(MainActivity.this,"No saved profile detected!",Toast.LENGTH_LONG).show();
+                }else{
+                    questions=true;
+
+                    edit.putBoolean("questions",questions);
+                    edit.commit();
+
+                    //True status indicates we are  a returning customer
+                    Intent launch= new Intent(MainActivity.this, questionActivity.class);
+                    startActivity(launch);
+                }
+
             }
         });
 
@@ -49,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
            @Override
            public void onClick(View v){
                questions=false;
-               edit.putBoolean("mode",questions);
+               edit.putBoolean("questions",questions);
                edit.commit();
 
                //True status indicates we are considering car loan
