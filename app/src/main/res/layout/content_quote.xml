@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.xu.mortgageme.quoteActivity"
+    tools:showIn="@layout/activity_quote">
+
+
+    <TextView
+        android:id="@+id/textViewlol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="117dp"
+        android:minLines="3"
+        android:padding="10dp"
+        android:text="Based on the information you provided us, we've calculated your mortgage interest to be" />
+
+    <TextView
+        android:id="@+id/amountView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewlol"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:text="5.25%"
+        android:textSize="20dp"/>
+
+    <Button
+        android:id="@+id/btncall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/amountView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="97dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:text="Arrange appointment with a member of our team" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp"
+        android:text="Thank you for choosing Barclays " />
+
+    <Button
+        android:id="@+id/btnreset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btncall"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:text="Start over" />
+</RelativeLayout>

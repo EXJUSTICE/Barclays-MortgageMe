@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">MortgageMe</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_question">questionActivity</string>
+    <string name="title_activity_quote">quoteActivity</string>
+</resources>

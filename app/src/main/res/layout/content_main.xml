@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.xu.mortgageme.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="153dp"
+        android:text="Helping you on your way"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp"
+        android:textSize="32dp"
+        android:text="MortgageMe!" />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/welcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="136dp"
+        android:text="How can we help you today?" />
+
+    <Button
+        android:id="@+id/btnloan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="53dp"
+        android:text="I'm buying a car"
+        android:layout_below="@+id/question"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/btnmortgage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnloan"
+        android:layout_marginStart="24dp"
+        android:layout_toEndOf="@+id/btnloan"
+        android:text="I'm buying a home" />
+</RelativeLayout>
