@@ -68,8 +68,12 @@ public class quoteActivity extends AppCompatActivity {
         sp = getSharedPreferences("decisions", Context.MODE_PRIVATE);
         edit = sp.edit();
 
+        //String rawinterest =Double.toString(interest)+"%"
 
-            interestView.setText(Double.toString(interest)+"%");
+        String.format("%.2f", interest);
+
+
+            interestView.setText(String.format("%.2f", interest)+"%");
 
         call.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -96,11 +100,13 @@ public class quoteActivity extends AppCompatActivity {
             public void onClick(View v){
                 if(shown ==false){
 
-                    DialogFragment df = new DialogFragment();
                     SharedPreferences sp = getSharedPreferences("user",Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor= sp.edit();
                     editor.putString("post",postcode);
                     editor.commit();
+
+                    DialogFragment df = new DialogFragment();
+
                     df.show(getSupportFragmentManager(),"Nearby Services");
 
 

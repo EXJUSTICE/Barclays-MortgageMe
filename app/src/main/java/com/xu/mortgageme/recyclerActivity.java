@@ -52,7 +52,7 @@ public class recyclerActivity extends AppCompatActivity {
         sp = getSharedPreferences("user", Context.MODE_PRIVATE);
         postcode = sp.getString("post","M60 7RA");
         services =(TextView)findViewById(R.id.servicesclose);
-        services.setText(postcode);
+        services.setText("Services near "+postcode);
         initializeLists();
 
 
@@ -83,6 +83,11 @@ public class recyclerActivity extends AppCompatActivity {
         names.add("Manchester's Plumbers");
         names.add("Manchester Electric");
         names.add("J.D Electricians");
+        names.add("Our Lady's R C High School");
+        names.add("Chorlton High School");
+        names.add("The Manchester Cleaning Company");
+        names.add("FirstMaid Cleaners");
+        names.add("Nannyplus Childcare");
 
 
         types.add("Moving/Relocation service");
@@ -92,6 +97,12 @@ public class recyclerActivity extends AppCompatActivity {
         types.add("Plumbers");
         types.add("Electricians");
         types.add("Electricians");
+        types.add("High School");
+        types.add("High School");
+        types.add("Cleaning service");
+        types.add("Cleaning service");
+        types.add("Nanny");
+
 
         numbers.add("+4401614510136");
         numbers.add("+4407944079878");
@@ -101,6 +112,11 @@ public class recyclerActivity extends AppCompatActivity {
         numbers.add("+441613123229");
         numbers.add("+441618501610");
         numbers.add("+441618659772");
+        numbers.add("+441617959004");
+        numbers.add("+441618821150");
+        numbers.add("+448009750141");
+        numbers.add("+441618706088");
+        numbers.add("+441617487665");
 
     }
 
